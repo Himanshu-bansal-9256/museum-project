@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    /* Light background */
+}
+
+header {
+    background-size: cover;
+    background-position: center;
+    background-image: url("https://www.rajasthantourplanner.com/image/rajasthan-budget-tour-travel-trip-packages.webp");
+    color: white;
+    font-size: larger;
+    padding: 20px;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    font-size: large;
+    color: black;
+}
+
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: whitesmoke;
+    /* White background for form */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+fieldset {
+    border: 2px solid #28a745;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: white
+
+}
+
+legend {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: black;
+    /* Blue color for legend */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+.aadhar{
+
+    width: 100px;
+    padding:10px;
+    background-color: #28a745;
+    border:none;
+    border-radius: 10px;
+    margin:10px;
+    
+}
+.aadhar a{
+    color: white;
+    font-size: large;
+    text-decoration: none;
+
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #28a745;
+    /* Green background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #218838;
+    /* Darker green on hover */
+}
+
+#confirmation {
+    background-color: #d4edda;
+    /* Light green background */
+    border: 1px solid #c3e6cb;
+    /* Green border */
+    padding: 15px;
+    border-radius: 5px;
+}
+
+#confirmationMessage {
+    font-size: 1.1em;
+    color: #155724;
+    /* Dark green text */
+}
+
+footer {
+    background-color: white;
+    /* Blue background */
+    color: black;
+    text-align: center;
+    padding: 10px;
+    /* position: fixed; */
+    bottom: 0px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}

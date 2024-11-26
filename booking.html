@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museum of Rajasthan Ticketing System</title>
+    <link rel="stylesheet" href="booking.css">
+    <!-- <link rel="stylesheet" href="aadhar.css"> -->
+</head>
+
+<body>
+    <header>
+        <h1>Museum of India</h1>
+
+    </header>
+    <p>Online Ticketing System</p>
+
+    <main>
+        <section id="ticket-form">
+            <h2>Book Your Tickets</h2>
+            <form id="bookingForm">
+                <!-- User Details Section -->
+                <fieldset>
+                    <legend>Visitor Information</legend>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="contact">Contact Number:</label>
+                    <input type="tel" id="contact" name="contact" required>
+
+                    <label for="date">Date of Visit:</label>
+                    <input type="date" id="date" name="date" required>
+                </fieldset>
+
+                <!-- Ticket Type Section -->
+                <fieldset>
+                    <legend>Number of Tickets</legend>
+
+                    <div>
+                        <label for="adultTickets">Adult Tickets:</label>
+                        <input type="number" id="adultTickets" name="adultTickets" min="0" value="0">
+                    </div>
+                    <div>
+                        <label for="childTickets">Child Tickets:</label>
+                        <input type="number" id="childTickets" name="childTickets" min="0" value="0">
+                    </div>
+                    <div>
+                        <label for="seniorTickets">Senior Tickets:</label>
+                        <input type="number" id="seniorTickets" name="seniorTickets" min="0" value="0">
+                    </div>
+                </fieldset>
+
+                <!-- Nationality Section -->
+                <fieldset>
+                    <legend>Select Nationality</legend>
+                    <div>
+                        <input type="radio" id="indian" name="nationality" value="indian" required>
+                        <label for="indian">Indian</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="foreigner" name="nationality" value="foreigner" required>
+                        <label for="foreigner">Foreigner</label>
+                    </div>
+                </fieldset>
+
+                <!-- Price Breakdown Section -->
+                <div id="priceBreakdown">
+                    <h3>Price Breakdown:</h3>
+                    <p id="breakdownText">Select tickets to see the price breakdown.</p>
+                </div>
+                <h3 id="totalPrice">Total Price: ₹0.00</h3>
+                <legend>Aadhaar Card Information</legend>
+                <div class="aadhar"><a href="aadhar.html"> Your Aadhar</a></div>
+
+                
+
+                <!-- Payment Information Section -->
+                <fieldset>
+                    <legend>Payment Information</legend>
+                    <div>
+                        <label for="cardName">Cardholder's Name:</label>
+                        <input type="text" id="cardName" name="cardName" required>
+                    </div>
+                    <div>
+                        <label for="cardNumber">Card Number:</label>
+                        <input type="text" id="cardNumber" name="cardNumber" maxlength="16" required>
+                    </div>
+                    <div>
+                        <label for="expiryDate">Expiry Date (MM/YY):</label>
+                        <input type="text" id="expiryDate" name="expiryDate" maxlength="5" required>
+                    </div>
+                    <div>
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" name="cvv" maxlength="3" required>
+                    </div>
+                </fieldset>
+
+                <!-- Submit Button -->
+                <button type="submit" id="confirmButton">Confirm Booking</button>
+            </form>
+
+            <!-- Booking Confirmation Section -->
+            <div id="confirmation" style="display:none;">
+                <h3>Booking Confirmation</h3>
+                <p id="confirmationMessage"></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <p>&copy; 2024 Museum of India. All rights reserved.</p>
+    </footer>
+
+    <!-- Include jsPDF library and QR Code generator -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+    <script src="booking.js"></script>
+
+    <script src="aadhar.js"></script> 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dateInput = document.getElementById("date");
+            const today = new Date();
+            const formattedDate = today.toISOString().split("T")[0];
+            dateInput.setAttribute("min", formattedDate);
+        });
+        </script>
+        
+</body>
+
+</html>

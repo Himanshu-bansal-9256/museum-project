@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Page</title>
+</head>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color:white;
+}
+
+.container {
+  width: 400px;
+  margin: 100px auto;
+  padding: 60px;
+   background-size:cover;
+   background-position:center;
+  background-image:url("https://img.freepik.com/free-vector/dark-wavy-colors-background_23-2148403785.jpg?t=st=1726936332~exp=1726939932~hmac=c69d662909fcfe3eb2f61d4e32f58c391ba1a3a70463fdae7d2fe489c848d8f6&w=740");
+  opacity:0.1px ;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color:white;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color:white;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 105%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  margin-top:10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.signup-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+</style>
+<body>
+  <div class="container">
+    <h2>Sign Up</h2>
+    
+    <form id="signUpForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <div id="signup">
+        <button id="signUpButton">Sign Up</button>
+      </div>
+      
+    </form>
+    <!-- OTP Verification Form (initially hidden) -->
+  <div id="otpForm" style="display:none;">
+    <h2>Verify OTP</h2>
+    <p>OTP sent to: <span id="displayPhoneNumber"></span></p>
+    <input type="text" id="otpInput" placeholder="Enter OTP" required>
+    <button id="verifyOtpButton">Verify OTP</button>
+  </div>
+  
+
+  </div>
+  
+  <script>
+ // Event listener for Sign-Up button
+document.getElementById('signUpButton').addEventListener('click', function() {
+    const phoneNumber = document.getElementById('signupPhone').value;
+
+    // Ensure the phone number field is not empty
+    if (!phoneNumber) {
+        alert('Please enter a valid phone number.');
+        return;
+    }
+
+    // Call the backend API to generate the OTP and send it to the user's phone
+    fetch('/api/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phoneNumber })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // OTP generated and sent successfully
+            alert('OTP sent successfully to ' + phoneNumber);
+
+            // Hide the sign-up form and show the OTP form
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('otpForm').style.display = 'block';
+            
+            // Show the phone number on the OTP form
+            document.getElementById('displayPhoneNumber').innerText = phoneNumber;
+        } else {
+            alert('Failed to send OTP: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error generating OTP:', error);
+        alert('Something went wrong. Please try again.');
+    });
+});
+
+// Event listener for OTP verification button
+document.getElementById('verifyOtpButton').addEventListener('click', function() {
+    const phoneNumber = document.getElementById('signupPhone').value;
+    const otp = document.getElementById('otpInput').value;
+
+    // Ensure OTP field is not empty
+    if (!otp) {
+        alert('Please enter the OTP.');
+        return;
+    }
+
+    // Call the backend API to verify the OTP
+    fetch('/api/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phoneNumber, otp: otp })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('OTP verified successfully! Completing sign-up process...');
+            // Continue with your sign-up completion logic here, e.g., creating the user account
+        } else {
+            alert('OTP verification failed: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error verifying OTP:', error);
+        alert('Something went wrong. Please try again.');
+    });
+});
+
+</script>
+</body>
+</html>
